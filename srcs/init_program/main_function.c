@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:49:58 by pganglof          #+#    #+#             */
-/*   Updated: 2020/02/20 16:52:09 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:44:00 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	main_function(t_data *data)
 	data->savestdin = dup(STDIN_FILENO);
 	data->savestdout = dup(STDOUT_FILENO);
 	minishell_signals();
+	line = NULL;
 	while (1)
 	{
-		line = NULL;
 		if ((data->str_prompt = ft_prompt(data)))
 			ft_putstr(data->str_prompt);
 		line = get_command(data);
