@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:49:58 by pganglof          #+#    #+#             */
-/*   Updated: 2020/02/20 18:44:00 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:53:57 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	main_function(t_data *data)
 	line = NULL;
 	while (1)
 	{
+		ft_lstclear(&data->garbage_collector, &free);
 		if ((data->str_prompt = ft_prompt(data)))
 			ft_putstr(data->str_prompt);
 		line = get_command(data);
 		data->lst_parsing = NULL;
 		data->lst_parsing = parsing_command(line, data);
 		exec_command(&data->lst_parsing, data);
-		ft_lstclear(&data->garbage_collector, &free);
 	}
 }

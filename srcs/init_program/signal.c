@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:54:55 by mcraipea          #+#    #+#             */
-/*   Updated: 2020/02/20 18:43:19 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:58:58 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void			minishell_signals(void)
 
 static void		minishell_signals_handler2(int i)
 {
-	t_data		*data;
+	int			pid;
+	int			status;
 
-	if (!(data = ft_calloc(1, sizeof(t_data))))
-		return ;
+	pid = 0;
 	if (i == SIGINT)
 	{
 		ft_printf(2, "\b\b%c%c\n", 0x7f, 0x7f);
@@ -50,9 +50,8 @@ static void		minishell_signals_handler2(int i)
 	}
 	else if (i == SIGQUIT)
 	{
-		ft_printf(2, "\b\b%c%c\n", 0x7f, 0x7f);
-		waitpid(data->pid, &data->status, 0);
-		ft_printf(2, "Quit: %d\n", data->status);
+		waitpid(pid, &status, 0);
+		ft_printf(2, "Quit: %d\n", status);
 		signal(SIGQUIT, minishell_signals_handler);
 		signal(SIGINT, minishell_signals_handler);
 	}
