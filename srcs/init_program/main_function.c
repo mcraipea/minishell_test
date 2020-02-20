@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 16:49:58 by pganglof          #+#    #+#             */
-/*   Updated: 2020/02/20 15:22:09 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:52:09 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ char	*get_command(t_data *data)
 			exit_failure2(0, NULL, NULL, data);
 		else if (ret == 0)
 			ft_printf(1, "%c%c\b\b", 0x7f, 0x7f);
-		if (buf[0] == '\n')
+		if (buf[0] == '\n' && line == NULL)
+			main_function(data);
+		else if (buf[0] == '\n')
 			break ;
 		if (!(line = ft_strjoin(line, buf)))
 			exit_failure("ft_strjoin", data);
 		add_garbage((void**)&line, data);
 	}
 	if (ret == -1)
-		exit_failure("get_next_line", data);
+		exit_failure(NULL, data);
 	return (line);
 }
 

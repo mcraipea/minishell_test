@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 10:51:42 by pganglof          #+#    #+#             */
-/*   Updated: 2020/02/20 15:23:14 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:07:45 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ static void		ft_echo2(t_parsing *parsing, t_data *data)
 	if (!ft_strcmp(parsing->arg[i], "$?"))
 		ft_printf(1, "%d\n", data->ret);
 	else
-		ft_printf(1, "%s\n", parsing->arg[i]);
+	{
+		if (parsing->arg[i][0] != '\0')
+			ft_printf(1, "%s", parsing->arg[i]);
+		ft_printf(1, "\n");
+	}
 }
 
 int				ft_echo(t_parsing *parsing, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: pganglof <pganglof@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:54:55 by mcraipea          #+#    #+#             */
-/*   Updated: 2020/02/20 15:22:38 by pganglof         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:02:59 by pganglof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ static void		minishell_signals_handler(int i)
 	if (i == SIGINT)
 	{
 		ft_printf(1, "\b\b%c%c\n", 0x7f, 0x7f);
-		if ((data->str_prompt = ft_prompt(data)))
-			ft_putstr(data->str_prompt);
+		close(0);
 		signal(SIGINT, minishell_signals_handler);
+		signal(SIGQUIT, minishell_signals_handler);
 	}
 	else if (i == SIGQUIT)
 	{
 		ft_printf(1, "\b\b%c%c\b\b", 0x7f, 0x7f);
+		signal(SIGINT, minishell_signals_handler);
 		signal(SIGQUIT, minishell_signals_handler);
 	}
 }
